@@ -7,24 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-public class DemoApplication implements CommandLineRunner {
-
-	@Autowired
-	public PasswordEncoder passwordEncoder;
+public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-
-	@Override
-	public void run(String... args) throws Exception {
-		// Gerando a senha em formato hash
-		System.out.println("ENCODE = " + passwordEncoder.encode("123456"));
-
-		// Comparando como o Algoritmo realiza a comparação da senha digitada com o hash
-		boolean result = passwordEncoder.matches("123456", "$2a$10$nAqzsknsa5RVK4PdxvBfSu1odtpAQbV3D08ev9GrRaepbZKLUvVYi");
-		System.out.println("RESULTADO = " + result);
-	}
-
 
 }
