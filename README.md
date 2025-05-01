@@ -85,6 +85,23 @@ public class SecurityConfig {
 }
 ```
 
+## Checklist do Spring Security
+![image](https://github.com/user-attachments/assets/f3d7ca0d-0be4-44d0-b290-60c0bb4909b1)
+
+## Filtro do H2 para Spring Security
+```Java
+
+	@Bean
+	@Profile("test")
+	@Order(1)
+	SecurityFilterChain h2SecurityFilterChain(HttpSecurity http) throws Exception {
+
+		http.securityMatcher(PathRequest.toH2Console()).csrf(csrf -> csrf.disable())
+				.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()));
+		return http.build();
+	}
+```
+
 ## Referência
 
  - [JWT](https://jwt.io/)
