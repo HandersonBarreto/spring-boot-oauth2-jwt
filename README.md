@@ -1,5 +1,5 @@
-
 # Login e controle de acesso
+# TEORIA
 
 ## Ideia Geral
 ### Login
@@ -50,8 +50,44 @@ SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 4. O cliente (aplicação) usa o Access Token para acessar o Resource Server (o recurso desejado).
 5. O Resource Server valida o token e retorna o recurso se tudo estiver OK.
 
+# PRÁTICA
+
+## Modelo de dados User-Role
+
+![image](https://github.com/user-attachments/assets/b95f18af-726f-4b1a-b378-6a75a866ffb6)
+
+## Dependências Spring Security
+
+```Bash
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-test</artifactId>
+    <scope>test</scope>
+</dependency>
+```
+
+## Liberando provisoriamente os endpoints
+```Bash
+@Configuration
+public class SecurityConfig {
+
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.csrf(csrf -> csrf.disable());
+		http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+		return http.build();
+	}
+}
+```
+
 ## Referência
 
  - [JWT](https://jwt.io/)
  - [Códigos de status de respostas HTTP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Reference/Status)
  - [OAuth 2.0](https://oauth.net/2/)
+ - [BCryptPasswordEncoder](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.html)
